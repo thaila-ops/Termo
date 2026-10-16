@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#172d2b">
+    <title>Termo — Galpão ao vivo</title>
+    <link rel="stylesheet" href="simulacao.css">
+</head>
+
+<body>
+    <header><a class="wordmark" href="index.html" target="_blank" rel="noopener"><span>◈</span> termo<span
+                class="wordmark-sub">GALPÃO AO VIVO</span></a>
+        <div class="header-actions"><a class="quiet" href="index.html" target="_blank" rel="noopener">Abrir painel
+                ↗</a><button id="present">⛶ Apresentar</button><button id="connect" class="primary">Conectar
+                Micro:bit</button></div>
+    </header>
+    <main>
+        <div class="intro">
+            <div><span class="eyebrow">DA MAQUETE PARA A TELA</span>
+                <h1>O ambiente muda. <br>O Termo responde.</h1>
+                <p>Uma janela para o que acontece no seu galpão.</p>
+            </div>
+            <div class="live-pill" id="livePill"><span></span><b id="sourceLabel">Aguardando sensor</b></div>
+        </div>
+        <div class="workspace">
+            <section class="world-panel" aria-label="Maquete virtual do galpão">
+                <div class="world-heading">
+                    <div><span class="eyebrow">UNIDADE 01</span>
+                        <h2>Galpão de armazenamento</h2>
+                    </div><span class="view-tag">VISTA ISOMÉTRICA</span>
+                </div>
+                <div class="world" id="world"><svg id="warehouse" viewBox="0 0 1000 650" role="img"
+                        aria-labelledby="sceneTitle sceneDesc">
+                        <title id="sceneTitle">Galpão Termo em perspectiva</title>
+                        <desc id="sceneDesc">Estoque A com sensor real, expedição e apoio sem sensor. Use os botões
+                            abaixo ou passe o mouse nos setores.</desc>
+                        <defs>
+                            <pattern id="tiles" width="52" height="52" patternUnits="userSpaceOnUse"
+                                patternTransform="matrix(1 .5 -1 .5 500 190)">
+                                <path d="M52 0H0V52" fill="none" stroke="#c8d4cf" stroke-width="1" />
+                            </pattern>
+                            <filter id="shadow">
+                                <feGaussianBlur stdDeviation="13" />
+                            </filter>
+                            <g id="box">
+                                <path d="M0 0l35 -18 35 18 -35 18z" fill="#e4ba7d" />
+                                <path d="M0 0v34l35 19V18z" fill="#bc8e59" />
+                                <path d="M35 18v35l35 -19V0z" fill="#d3a56c" />
+                                <path d="M28 -14l35 18 -8 4 -35 -18z" fill="#f2d7a8" />
+                                <path d="M35 18v13l8 -4V14" fill="#ead1a4" />
+                            </g>
+                            <g id="rack">
+                                <path d="M0 0l100 -50 0 105 -100 50z" fill="#64807a" />
+                                <path d="M8 10l84 -42v34L8 44z M8 52l84 -42v35L8 87z" fill="#344e49" />
+                                <path d="M0 0v105 M100 -50v105 M0 50l100 -50" stroke="#8ea69d" stroke-width="6" />
+                                <use href="#box" transform="translate(12 22) scale(.65)" />
+                                <use href="#box" transform="translate(55 0) scale(.65)" />
+                                <use href="#box" transform="translate(12 65) scale(.65)" />
+                                <use href="#box" transform="translate(55 43) scale(.65)" />
+                            </g>
+                        </defs>
+                        <ellipse cx="495" cy="515" rx="365" ry="80" fill="#263e31" opacity=".12"
+                            filter="url(#shadow)" />
+                        <!-- Cutaway walls and floor -->
+                        <path d="M145 285L500 108 855 285 500 463z" fill="#b5c5bb" />
+                        <path d="M145 285V185L500 8v100z" fill="#e1e9df" />
+                        <path d="M500 8L855 185v100L500 108z" fill="#c9d8ce" />
+                        <path d="M165 191l315 -157v49L165 240z" fill="#f4f6ec" />
+                        <path d="M530 45l110 55v45l-110 -55z M660 110l155 77v45l-155 -77z" fill="#a2c7c2" />
+                        <path d="M145 285l355 -177 355 177 -355 178z" fill="url(#tiles)" />
+                        <g class="zone" data-zone="stock">
+                            <path id="stockFloor" d="M165 286l225 -113 190 95 -225 113z" fill="#8ac8a5" opacity=".5" />
+                            <path d="M165 286l225 -113 190 95 -225 113z" fill="none" stroke="#579d7c" stroke-width="2"
+                                stroke-dasharray="7 6" />
+                        </g>
+                        <g class="zone" data-zone="shipping">
+                            <path d="M375 392l224 -112 220 110 -224 112z" fill="#d8c8a2" opacity=".45" />
+                        </g>
+                        <g class="zone" data-zone="support">
+                            <path d="M410 163l90 -45 325 162 -90 45z" fill="#bacada" opacity=".45" />
+                        </g>
+                        <!-- Front edge -->
+                        <path d="M145 285v18l355 178v-18z" fill="#869f90" />
+                        <path d="M500 463v18l355 -178v-18z" fill="#a1b6a8" />
+                        <use href="#rack" transform="translate(227 239)" />
+                        <use href="#rack" transform="translate(343 181)" />
+                        <use href="#box" transform="translate(350 306)" />
+                        <use href="#box" transform="translate(392 327)" />
+                        <use href="#box" transform="translate(350 270)" />
+                        <!-- Loading pallets -->
+                        <path d="M552 373l92 -46 100 50 -92 46z" fill="#99794f" />
+                        <path d="M552 373v10l100 50v-10z" fill="#705638" />
+                        <use href="#box" transform="translate(574 348)" />
+                        <use href="#box" transform="translate(646 348)" />
+                        <use href="#box" transform="translate(610 366)" />
+                        <!-- Support table -->
+                        <path d="M636 254v43 M726 254v43 M681 278v40" stroke="#677d75" stroke-width="6" />
+                        <path d="M626 250l46 -23 64 32 -46 23z" fill="#e9ede3" />
+                        <path d="M653 244v-28l34 17v28z" fill="#263c37" />
+                        <path d="M657 240v-18l26 13v18z" fill="#8fcab6" />
+                        <!-- Air conditioning unit -->
+                        <g id="aircon">
+                            <path d="M524 79l94 47v39l-94 -47z" fill="#f7faf2" />
+                            <path d="M524 79l12 -6 94 47 -12 6z" fill="#fff" />
+                            <path d="M618 126l12 -6v39l-12 6z" fill="#9eafa7" />
+                            <path d="M535 108l70 35 M535 115l70 35" stroke="#9cafa8" stroke-width="3" />
+                            <circle id="acLamp" cx="607" cy="135" r="3" fill="#83988e" />
+                        </g>
+                        <g class="wind" fill="none" stroke="#64b8d8" stroke-width="4" stroke-linecap="round">
+                            <path d="M548 145q-50 40 -23 68" />
+                            <path d="M572 157q-44 37 -17 65" />
+                            <path d="M594 168q-35 34 -13 58" />
+                        </g>
+                        <!-- Person / observer -->
+                        <g transform="translate(486 347)">
+                            <ellipse cy="38" rx="16" ry="8" fill="#284a3a" opacity=".15" />
+                            <path d="M-6 16l-3 20 M6 16l4 20" stroke="#354b54" stroke-width="7" />
+                            <path d="M-10 -5h20l3 24h-26z" fill="#cf835f" />
+                            <circle cy="-16" r="10" fill="#e7c29a" />
+                            <path d="M-10 -19q0 -17 17 -8l3 9" fill="#34443a" />
+                            <path d="M-12 0l-9 15 M12 0l10 12" stroke="#e7c29a" stroke-width="6" />
+                        </g>
+                        <!-- Sensor location -->
+                        <g class="zone sensor-marker" data-zone="stock" transform="translate(302 263)">
+                            <path d="M0 -42l15 9v18l-15 18 -15 -33v-18z" fill="#207965" />
+                            <circle cy="-28" r="5" fill="#d2f8df" />
+                            <circle class="sensor-ring" cy="5" r="18" fill="none" stroke="#39a580" stroke-width="2" />
+                        </g>
+                        <g class="zone" data-zone="stock">
+                            <rect x="179" y="395" width="182" height="56" rx="12" fill="#fff" /><text x="195" y="417"
+                                class="map-title">ESTOQUE A · P0</text><text id="mapTemp" x="195" y="439"
+                                class="map-value">Aguardando sensor</text>
+                        </g>
+                        <g class="zone" data-zone="shipping">
+                            <rect x="614" y="461" width="155" height="47" rx="10" fill="#fff" /><text x="628" y="481"
+                                class="map-title">EXPEDIÇÃO</text><text x="628" y="498" class="map-muted">Sem
+                                sensor</text>
+                        </g>
+                        <g class="zone" data-zone="support">
+                            <rect x="719" y="237" width="123" height="43" rx="9" fill="#fff" /><text x="732" y="255"
+                                class="map-title">APOIO</text><text x="732" y="271" class="map-muted">Sem sensor</text>
+                        </g>
+                        <text x="500" y="563" text-anchor="middle" class="scene-caption">UMA MAQUETE FÍSICA. UMA LEITURA
+                            REAL.</text>
+                    </svg>
+                    <div id="tooltip" class="tooltip" hidden></div>
+                </div>
+                <div class="sector-buttons" aria-label="Inspecionar setores"><button class="selected"
+                        data-sector="stock">● Estoque A <span>Sensor P0</span></button><button
+                        data-sector="shipping">Expedição <span>Sem sensor</span></button><button
+                        data-sector="support">Apoio <span>Sem sensor</span></button></div>
+                <div class="world-footer"><span><i class="key normal"></i> Normal</span><span><i class="key hot"></i>
+                        Calor detectado</span><span><i class="key cold"></i> LED confirmado</span><span>Passe o mouse ou
+                        toque nos setores</span></div>
+            </section>
+            <aside class="inspector">
+                <div class="inspector-top"><span class="eyebrow">SETOR SELECIONADO</span><span id="sectorBadge"
+                        class="badge">SENSOR REAL</span></div>
+                <h2 id="sectorName">Estoque A</h2>
+                <p id="sectorDescription">Área da maquete onde está o sensor Grove no P0.</p>
+                <div class="temperature"><strong id="sceneTemp">—</strong><span>°C</span></div>
+                <div class="humidity-line"><span>Umidade</span><b id="sceneHumidity">—</b></div>
+                <div id="statusCard" class="status-card"><b id="statusTitle">Vamos conectar?</b>
+                    <p id="statusText">Conecte o Micro:bit ou mantenha o painel conectado em outra aba deste mesmo
+                        servidor.</p>
+                </div>
+                <div class="ac-row">
+                    <div class="fan-icon" id="fan">✣</div>
+                    <div><b>Climatização simulada</b>
+                        <p id="acState">Aguardando dados</p>
+                    </div>
+                </div>
+                <p id="sampleTime" class="small">Nenhuma leitura recebida</p>
+                <p class="small">O vento é uma animação. O LED no P1 representa o acionamento; ele não resfria
+                    fisicamente a maquete.</p>
+            </aside>
+        </div>
+        <section class="explanation">
+            <div><span class="step">01</span><b>A maquete sente</b>
+                <p>O Grove mede o ambiente físico.</p>
+            </div>
+            <div><span class="step">02</span><b>O Termo interpreta</b>
+                <p id="limitsText">Liga em 30 °C. Apaga em 27 °C.</p>
+            </div>
+            <div><span class="step">03</span><b>A tela acompanha</b>
+                <p>Cor, alerta e LED mostram a resposta.</p>
+            </div>
+        </section>
+        <details class="demo-panel">
+            <summary>Sem a maquete? Testar com dados fictícios</summary>
+            <p>O teste não aciona o LED físico e fica separado do histórico real.</p>
+            <div class="demo-controls"><label>Temperatura <output id="tempOut">28 °C</output><input id="simTemp"
+                        type="range" min="10" max="45" step="0.5" value="28"></label><label>Umidade <output
+                        id="humOut">55 %</output><input id="simHum" type="range" min="10" max="95"
+                        value="55"></label><button id="simulate">Iniciar demonstração</button></div>
+        </details>
+        <p id="message" role="status" aria-live="polite"></p>
+        <footer><span>TERMO / tecnologia que sente e responde.</span><span id="connection">Sem conexão USB</span><span
+                id="source">Dados reais · USB</span><span id="updated">Aguardando leitura</span></footer>
+    </main>
+    <script src="app.js"></script>
+    <script src="simulacao.js"></script>
+</body>
+
+</html>
